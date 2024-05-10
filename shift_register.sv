@@ -23,19 +23,19 @@ module shift_register #(
 
     always_comb begin
         case (funct_i)
-            NA:    out_d = out_q;  // No operation, retain previous state
-            LOAD:  out_d = word_i; // Load new data into the register
-            LEFT:  out_d = {out_q[WIDTH-2:0], serial_i}; // Left shift with serial input
-            RIGHT: out_d = {serial_i, out_q[WIDTH-1:1]}; // Right shift with serial input
-            default: out_d = out_q; // Default behavior if invalid function is provided
+            NA:    out_d = out_q; 
+            LOAD:  out_d = word_i; 
+            LEFT:  out_d = {out_q[WIDTH-2:0], serial_i}; 
+            RIGHT: out_d = {serial_i, out_q[WIDTH-1:1]}; 
+            default: out_d = out_q;
         endcase
     end
 
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
-            out_q <= '0;  // Reset the register to 0
+            out_q <= '0;  
         end else begin
-            out_q <= out_d;  // Update register with new value based on operation
+            out_q <= out_d;  
         end
     end
 
